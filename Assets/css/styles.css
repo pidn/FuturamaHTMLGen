@@ -21,12 +21,61 @@
 body 
 {
   font-family:Roboto;
+  background:blue;
 }
 
 .font_test_1 {
   font-family:Futurama;
   font-size:2em;
+
 }
+
+.grid 
+{
+  display:flex;  
+  flex:1;
+  justify-content:space-between;
+  overflow:auto;
+}
+
+.grid-item
+{
+  background-color: rgba(221, 220, 220, 0.8);
+  padding:10px;
+  margin:2px;
+
+}
+.grid > div, .grid > video
+{
+  display:inline-block;
+}
+
+.info_container
+{
+  display:inline-block; 
+  width:300px;
+  vertical-align:top; 
+  margin-left:5px;
+  font-family:Futurama;
+}
+
+.filter_item {
+  padding:5px;
+  border:1px solid grey;
+  background:white;
+  font-family:Futurama;
+  font-size:0.9em;
+  cursor:pointer;
+  display:inline-block;
+}
+
+.filter_item:hover, .filter_item.active
+{
+  background:grey;
+}
+
+
+
 
 
 

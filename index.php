@@ -16,6 +16,8 @@ if ( ! class_exists( 'FuturamaHTMLGen' ) ) :
 
 	define( "plugin-file", __FILE__, true );
 	define( "plugin-dir", __DIR__, true );
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
 	
 
 	class FuturamaHTMLGen

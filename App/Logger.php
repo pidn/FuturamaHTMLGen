@@ -1,24 +1,39 @@
 <?php
 namespace FuturamaHTMLGen\App;
-
-class Logger 
+class Logger
 {
-    public function __construct(){
-        define( "LOGGER", true );
+    private function __construct()
+    {
+        if( !defined( "ABSPATH" ) )
+        {
+            wp_die( "Direct Access to this file Is prohibited" );
+        }
     }
-
-    public static function dump( $msg, $label=null ) 
+    private function __clone()
+    {
+    }
+      
+    private function __wakeup()
+    {
+    }
+    public static function log($msg, $lbl=null)
+    {
+        ob_start();
+        echo "### ".$lbl." ###".PHP_EOL;
+        var_dump($msg);
+        $output = ob_get_contents();
+        ob_end_clean();
+        error_log($output);
+    }
+    public static function dump($msg, $lbl=null)
     {
         ob_start();
         echo "<pre>";
-        if( $label ) {
-            echo "### ".$label." ###"; 
-        }
-        var_dump( $msg );
-        echo"</pre>";
+        echo "### ".$lbl." ###".PHP_EOL;
+        var_dump($msg);
+        echo "</pre>";
         $output = ob_get_contents();
         ob_end_clean();
-        echo $output;
+        echo($output);
     }
-
 }

@@ -22,10 +22,11 @@ class Frontend
     <meta name='description' content='P-Seminar Futurama'>
     <meta name='author' content='Marty + Piet'>
 
-    <link rel='stylesheet' href='FuturamaHTMLGen/Assets/css/styles.css'>
-    <link rel='stylesheet' href='FuturamaHTMLGen/Assets/css/bootstrap.min.css'></div>
-    <script type='text/javascript' src='FuturamaHTMLGen/Assets/js/jquery_latest.min.js'></script>
-    <script src='FuturamaHTMLGen/Assets/js/scripts.js'></script>
+    <link rel='stylesheet' href='Assets/css/styles.css'>
+    <link rel='stylesheet' href='Assets/css/bootstrap.min.css'></div>
+    <script type='text/javascript' src='Assets/js/jquery_latest.min.js'></script>
+    <script type='text/javascript' src='Assets/js/isotope.min.js'></script>
+    <script src='Assets/js/scripts.js'></script>
 
     </head>
     <body>";
