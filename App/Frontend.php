@@ -36,6 +36,16 @@ class Frontend
     </body>
     </html>";
 
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    public function getFooter()
+    {
+        return $this->footer;
+    }
+
     //inhalt
     public $content = null;
 

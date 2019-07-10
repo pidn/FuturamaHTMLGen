@@ -2,7 +2,7 @@
 /**
  * Plugin Name: P-Seminar HTML Generator für Sticks
  * Version: 0.0.1
- * Author: Peter Schöpp
+ * Author: Peter Schöpp & Martina Herzog
  * Author URI: https://www.pswebstuff.de
  * GPL2
  */

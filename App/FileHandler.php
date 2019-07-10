@@ -23,4 +23,11 @@ class FileHandler
         $this->files = $files;
         return $this->files;
     }
+
+    public function exportData( $data )
+    {
+        $handle = fopen( "Export/index.html", "w" );
+        fwrite( $handle, $data );
+        return;
+    }
 }

@@ -9,8 +9,10 @@ class RunControl
 {
     public function __construct() 
     {   
-        $this->getFileList();
+        $this->frontend = new Frontend();
+        $this->initFileH();
         $this->generateOutput();
+        $this->generateForm();
         $this->display();
     }
 
@@ -18,20 +20,20 @@ class RunControl
     protected $frontend;
     protected $output;
     protected $fileHandler;
+    protected $exForm;
     protected $str_filter = array(
         ":",
         "/",
         " ",        
     );
     
-    protected function getFileList() 
+    protected function initFileH() 
     {
         $this->fileHandler = new FileHandler();
     }
 
-    protected function display() 
-    {
-        $this->frontend = new Frontend();
+    protected function display()     {
+        
         $this->frontend->setContent( $this->output );
         $this->frontend->render();    
     }
@@ -39,15 +41,13 @@ class RunControl
     protected function generateOutput()
     {
         $this->output = null;
-
-        $this->output .= "
-                            <div class='headline'>
-                            <h4>P-Seminar Futurama</h4>
-                            </div>";
-
-        $this->output .= "
-        <p>Font Test 1</p>
-        <div class='font_test_1'>ABCEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</div>";
+        //<img class='fgen_top_bg' src='./Assets/img/logo2.png'>
+        $this->output = "
+        <div class='fgen_intro_container'>
+        <video autoplay muted class='fgen_intro_video' src='./Assets/intro/Intro.mp4'>
+        <source src='./Assets/intro/Intro.mp4' type='video/mp4'>
+        Euer Browser ist Scheiße, bitte Chrome oder Firefox</video>
+        </div>";
 
         //loop through directory, build themen array 
         foreach( $this->fileHandler->getFiles( $this->directory ) as $file ) {
@@ -98,11 +98,12 @@ class RunControl
                     <div class='info_container'>
                         <div class='fgen_season'>Staffel: ".$season."</div>
                         <div class='fgen_episode'>Episode: ".$episode."</div>
-                        <div class='fgen_txt'>".$txt."</div>
+                        <div class='fgen_txt'>".htmlentities($txt).".</div>
                     </div>
                 </div>";
             }
         }
+
         return $output;
     }
 
@@ -118,9 +119,32 @@ class RunControl
         foreach( $themen as $thema )
         {
             $class = ".".$this->formatStr( $thema );
+            
+            $active = $class == ".astrophysik" ? " active" : "";
             $result .= "
-            <div class='filter_item ".$class."' data-filter='".$class."'>".$thema."</div>";  
+            <div class='filter_item ".$class.$active."' data-filter='".$class."'>".$thema."</div>";  
         }
         return $result;
+    }
+
+    private function generateForm()
+    {
+        if( !isset($_POST['fgen_hidden']) )
+        {   
+            Logger::dump( $_POST );
+            $result = "
+            <form name='fgen_export_form' method='post' >
+            <input type='hidden' value='fgen_do_export' name='fgen_hidden'>
+            <input type='submit' value='Export'>
+            </form>";
+            $this->exForm = $result;    
+        } else {
+            $header = $this->frontend->getHeader();
+            $footer = $this->frontend->getFooter();
+            $toExport = $header.$this->output.$footer;
+            $this->fileHandler->exportData( $toExport );
+            $result = "Daten exportiert";
+            $this->exForm = $result;
+        }
     }
 }
